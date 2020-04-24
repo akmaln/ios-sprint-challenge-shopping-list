@@ -13,15 +13,19 @@ extension String {
 }
 
 class ShoppingItemController {
-    var shoppingListItems: [ShoppingItem] = [ShoppingItem(name: "Apple", imageName: "Apple"),
-                                        ShoppingItem(name: "Grapes", imageName: "Grapes"),
-                                        ShoppingItem(name: "Milk", imageName: "Milk"),
-                                        ShoppingItem(name: "Muffin", imageName: "Muffin"),
-                                        ShoppingItem(name: "Popcorn", imageName: "Popcorn"),
-                                        ShoppingItem(name: "Soda", imageName: "Soda"),
-                                        ShoppingItem(name: "Strawberries", imageName: "Strawberries")
-                                        ]
     
+    var shoppingListItems: [ShoppingItem] = [ShoppingItem(name: "Apple"),
+                                             ShoppingItem(name: "Grapes"),
+                                             ShoppingItem(name: "Milk"),
+                                             ShoppingItem(name: "Muffin"),
+                                             ShoppingItem(name: "Popcorn"),
+                                             ShoppingItem(name: "Soda"),
+                                             ShoppingItem(name: "Strawberries")]
+    
+    init() {
+       loadFromPresistentStore()
+        
+        }
     
     var shoppingListInitialized: Bool {
         get {
@@ -52,15 +56,17 @@ class ShoppingItemController {
     }
     
     func loadFromPresistentStore() {
+        let decoder = PropertyListDecoder()
+        
         do {
             guard let shoppingListURL = shoppingListURl else { return }
             let shoppingListData = try Data(contentsOf: shoppingListURL)
-            let decoder = PropertyListDecoder()
             let decodedShoppingList = try decoder.decode([ShoppingItem].self, from: shoppingListData)
             self.shoppingListItems = decodedShoppingList
         } catch {
             print("Unable to open shopping list plist: \(error)")
         }
-    }
+    } 
     
 }
+

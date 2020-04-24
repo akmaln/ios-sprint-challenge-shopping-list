@@ -9,15 +9,10 @@
 import Foundation
 import UIKit
 
-struct ShoppingItem: Encodable {
+struct ShoppingItem: Codable {
     var name: String
-    var hasBeenSelected: Bool = false
-    var image: UIImage
-    
-    init(name: String, imageName: String) {
-        self.name = name
-            
-        self.image = UIImage(named: imageName)!
+    var hasBeenSelected: Bool =  false 
+    var image: UIImage? {
+        UIImage(named: name)
     }
-    
 }

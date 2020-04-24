@@ -11,9 +11,7 @@ import UIKit
 
 
 class ShoppingListCollectionViewController: UICollectionViewController {
-    func showCheckoutAlert() {
-        <#code#>
-    }
+    
     
 
     let shoppingItemController = ShoppingItemController()
@@ -58,9 +56,10 @@ class ShoppingListCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ShoppingItemCollectionViewCell else {return}
         
-        var shoppingListItem = shoppingItemController.shoppingListItems[indexPath.item]
+        shoppingItemController.shoppingListItems[indexPath.item].hasBeenSelected.toggle()
         
-        shoppingListItem.hasBeenSelected.toggle()
+        shoppingItemController.saveToPersistenStore()
+        
         cell.shoppingItem?.hasBeenSelected.toggle()
         
         cell.updateSelectedLabel()

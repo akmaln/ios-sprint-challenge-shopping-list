@@ -37,7 +37,7 @@ class PlaceOrderViewController: UIViewController {
     
     func updateViews() {
         guard let shoppingItemController = shoppingItemController else { return }
-        descriptionLabel.text = "You have \(shoppingItemController.shoppingListItems.count) in your cart."
+        descriptionLabel.text = "You have \(shoppingItemController.shoppingListItems.filter{ item in item.hasBeenSelected }.count) items in your cart."
     }
     
         

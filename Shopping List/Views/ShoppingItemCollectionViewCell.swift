@@ -21,7 +21,7 @@ class ShoppingItemCollectionViewCell: UICollectionViewCell {
         
         imageView.image = shoppingItem.image
         itemNameLabel.text = shoppingItem.name
-        addRemoveLabel.text = "Not Added"
+        addRemoveLabel.text = shoppingItem.hasBeenSelected ? "Added" : "Not Added" 
     }
     
     @IBOutlet weak var imageView: UIImageView!
